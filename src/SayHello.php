@@ -8,4 +8,8 @@ class SayHello
     {
         return 'Hello World!';
     }
+
+    public static function hello(){
+        return "sdfsdf";
+    }
 }
