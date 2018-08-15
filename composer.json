@@ -1,0 +1,21 @@
+{
+    "name": "glidersky/glidersky",
+    "description": "new framework set",
+    "type": "project",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "license": "apache",
+    "authors": [
+        {
+            "name": "fengwei",
+            "email": "fengwayne@aliyun.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "GliderSky\\": "src/"
+        }
+    }
+}
