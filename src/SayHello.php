@@ -12,4 +12,8 @@ class SayHello
     public static function hello(){
         return "sdfsdf";
     }
+
+    public static function abc(){
+        echo "23423434";
+    }
 }
