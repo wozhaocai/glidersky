@@ -38,15 +38,12 @@ foreach($rs as $sCode){
     $all[$sCode['code']] = $temp;
 }
 foreach($all as $sCode=>$aData){
-    //if($sCode != "baba") continue;
     $aCulcData = array_reverse($aData["option"]);
     $num = 0;
     $iPrice = $aCulcData[0]["now_price"];
     foreach($aCulcData as $i => $row){
-        //if(abs(($iPrice-$row["now_price"])/$iPrice) < 0.01){
-        if($row["sum_rate"] < 1.2 and abs($row["up_rate"]) > 0.01){
+        if($row["sum_rate"] < 1.2 and abs($row["up_rate"]) < 0.01){
             $num++;
-            //$iPrice = $row["now_price"];
         }else{
             break;
         }
