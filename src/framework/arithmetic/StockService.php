@@ -50,34 +50,34 @@ class StockService
             $temp["sum"] = $this->_sModel->query($sql);
             $all[$sCode['code']] = $temp;
         }
+        return $all;
     }
 
     public function upRateDayGreateTwo(){
         $all = $this->getSumData();
         foreach($all as $sCode=>$aData){
-            //if($sCode != "baba") continue;
             $aCulcData = array_reverse($aData["option"]);
             $num = 0;
-            $iPrice = $aCulcData[0]["now_price"];
             foreach($aCulcData as $i => $row){
-                //if(abs(($iPrice-$row["now_price"])/$iPrice) < 0.01){
                 if($row["up_rate"] > 2){
                     $num++;
-                    //$iPrice = $row["now_price"];
                 }else{
                     break;
                 }
             }
             if($num > 1){
-                echo "\n-------------------{$sCode}------------------------------\n";
-                foreach($aCulcData as $i => $row){
-                    foreach($row as $key=>$val){
-                        echo $key.":".$val."\t";
-                    }
-                    echo "\n";
-                }
-                //debugVar($aCulcData);
+                $this->output($aCulcData,$sCode);
             }
+        }
+    }
+
+    function output($aCulcData,$sCode){
+        echo "\n-------------------{$sCode}------------------------------\n";
+        foreach($aCulcData as $i => $row){
+            foreach($row as $key=>$val){
+                echo $key.":".$val."\t";
+            }
+            echo "\n";
         }
     }
 }
