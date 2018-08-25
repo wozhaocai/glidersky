@@ -5,34 +5,33 @@
  * Date: 2018/8/19
  * Time: 19:00
  */
-//php job.php -btest\model\UsChinaPriceModel -aurdgt  中概连涨超过2天
-//php job.php -btest\model\UsChinaPriceModel -asraug  中概涨幅超过正负1个点，且量比小于1.2
-//php job.php -btest\model\UsChinaPriceModel -asraul  中概涨幅在正负1个点浮动，且量比小于1.2
+//php job.php -btest\model\UsChinaPriceModel -aurdgt -n2 中概连涨超过2天
+//php job.php -btest\model\UsChinaPriceModel -asraug -n5 中概涨幅超过正负1个点，且量比小于1.2
+//php job.php -btest\model\UsChinaPriceModel -asraul -n5 中概涨幅在正负1个点浮动，且量比小于1.2
 
 require_once "glidersky.php";
 
 $sHelp =<<<_HELP
 此脚本进行sql转换，拆分表的字段
-php job.php -t<type> -b<business_id> -s<script_id> -a<action> [-d<YYYYmmdd>] [-m<YYYYmm>]
+php job.php -b<business_id> -a<action> [-n<num>] [-d<YYYYmmdd>] [-m<YYYYmm>]
 
 options: 
-  t : 必选，类型,script(单个命令脚本）,workflow（工作流脚本)
-  b : 必选，business_id
-  s : 必选，脚本id
+8  b : 必选，business_id
   a : 必选，action
+  n : 可选，阈值
   d : 可选，日期
   m : 可选, 月份
               
 _HELP;
 
 
-$aOption = checkOpt($sHelp,'t::b::s::a::d::m::','a,b');
+$aOption = checkOpt($sHelp,'t::b::s::a::d::n::m::','a,b');
 foreach($aOption as $sKey=>$sVal){
     $_POST[$sKey] = $sVal;
 }
 
 $oStock = new \GliderSky\framework\arithmetic\StockService();
-$oStock->calculate($aOption["a"],$aOption["b"]);
+$oStock->calculate($aOption["a"],$aOption["b"],$aOption["n"]);
 
 function usage_help($sHelp) {
     echo str_replace("{script}", FILENAME, $sHelp);

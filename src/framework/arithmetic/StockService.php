@@ -18,17 +18,17 @@ class StockService
         "sraul" => "sumRate12AndUprateLess1",
     ];
 
-    public function calculate($name,$model){
+    public function calculate($name,$model,$rulenum){
         $sAction = self::$aArithmeticName[$name];
         $this->_sModel = new $model();
-        $this->getSumData($sAction);
+        $this->getSumData($sAction,$rulenum);
     }
 
     private function getCode(){
         return $this->_sModel->query("select distinct code from {$this->_sModel->table};");
     }
 
-    private function getSumData($sRuleFunction){
+    private function getSumData($sRuleFunction,$iRuleCnt){
         $rs = $this->getCode();
         $all = array();
         foreach($rs as $sCode){
@@ -62,7 +62,7 @@ class StockService
                     break;
                 }
             }
-            if($num > 1){
+            if($num > $iRuleCnt){
                 $this->output($aCulcData,$sCode);
             }
         }
