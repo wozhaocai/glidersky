@@ -14,19 +14,21 @@ class StockService
 
     private static $aArithmeticName = [
         "urdgt" => "upRateDayGreateTwo",
+        "sraug" => "sumRate12AndUprateGreate1",
+        "sraul" => "sumRate12AndUprateLess1",
     ];
 
     public function calculate($name,$model){
         $sAction = self::$aArithmeticName[$name];
         $this->_sModel = new $model();
-        $this->$sAction();
+        $this->getSumData($sAction);
     }
 
     private function getCode(){
         return $this->_sModel->query("select distinct code from {$this->_sModel->table};");
     }
 
-    private function getSumData(){
+    private function getSumData($sRuleFunction){
         $rs = $this->getCode();
         $all = array();
         foreach($rs as $sCode){
@@ -54,7 +56,7 @@ class StockService
             $aCulcData = array_reverse($aData["option"]);
             $num = 0;
             foreach($aCulcData as $i => $row){
-                if($row["up_rate"] > 2){
+                if($this->$sRuleFunction($row)){
                     $num++;
                 }else{
                     break;
@@ -68,6 +70,22 @@ class StockService
 
     public function upRateDayGreateTwo($row){
         if($row["up_rate"] > 2) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function sumRate12AndUprateGreate1($row){
+        if($row["sum_rate"] < 1.2 and abs($row["up_rate"]) > 0.01){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function sumRate12AndUprateLess1($row){
+        if($row["sum_rate"] < 1.2 and abs($row["up_rate"]) < 0.01){
             return true;
         }else{
             return false;
