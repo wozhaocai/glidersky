@@ -10,7 +10,7 @@ namespace GliderSky\framework\config;
 
 class ConfigService
 {
-    private static $_aConfigFile = array("database");
+    private static $_aConfigFile = array("database","spider");
     public static $Config = array();
 
     public function __construct($sConfigPath)
@@ -31,6 +31,7 @@ class ConfigService
         }
         class_alias('GliderSky\framework\config\ConfigService', 'Config');
         class_alias('GliderSky\framework\data\DataService', 'Data');
+        class_alias('GliderSky\framework\spider\SpiderService', 'Spider');
     }
 
     public static function loader($name){
