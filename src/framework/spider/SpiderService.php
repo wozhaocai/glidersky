@@ -6,7 +6,7 @@
  * Time: 20:57
  */
 
-namespace GliderSky\framework\arithmetic;
+namespace GliderSky\framework\spider;
 
 use GliderSky\lib\DateType;
 
@@ -32,13 +32,16 @@ class SpiderService
 
     public function run(){
         $this->parseUrl();
-        $this->fetchData();
+        $rs = $this->fetchData();
+        preg_match_all($this->_aParams["grep"], $rs, $matches);
+        if(!empty($matches)){
+            debugVar($matches);
+        }
+        exit;
     }
 
     private function fetchData(){
-        $rs = file_get_contents($this->_sUrl);
-        debugVar($rs);
-        exit;
+        return file_get_contents($this->_sUrl);
     }
 
     private function parseUrl(){
