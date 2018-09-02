@@ -11,12 +11,9 @@ require_once "glidersky.php";
 $module = new \GliderSky\framework\data\ModelService("test\model\UsChinaPriceModel");
 $rs = $module->query("select distinct code from {table};");
 $spider = new \GliderSky\framework\spider\SpiderService("US_CHINA");
+$store = new \GliderSky\framework\data\StoreService("file");
 foreach($rs as $row){
-    $row["grep"] = "/\"[\w]+\"/";
-    $row["splitstr"] = ",";
     $spider->setParams($row);
-    $spider->init();
-    $rs = $spider->run();
-    debugVar($rs);
-    exit;
+    $rs = $spider->run("json");
+    $store->save($row["code"],$rs);
 }

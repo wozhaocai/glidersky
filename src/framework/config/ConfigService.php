@@ -10,7 +10,7 @@ namespace GliderSky\framework\config;
 
 class ConfigService
 {
-    private static $_aConfigFile = array("database","spider");
+    private static $_aConfigFile = array("database","spider","store");
     public static $Config = array();
 
     public function __construct($sConfigPath)
