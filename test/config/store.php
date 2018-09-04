@@ -8,6 +8,6 @@
 
 return [
     "file" => [
-        "dir" => "D:\log",
+        "dir" => "/home/data/stock_log",
     ]
 ];

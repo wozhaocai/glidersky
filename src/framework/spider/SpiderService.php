@@ -28,8 +28,8 @@ class SpiderService
     }
 
     public function run($sFormat=""){
-        $this->parseUrl();
-        $rs = $this->fetchData();
+        $url = $this->parseUrl();
+        $rs = $this->fetchData($url);
         $data = $this->_oParseRules->getData($this->_aConfig["parse_rule"],$rs);
         $rs = $this->_oParseRules->saveData($data,$this->_aConfig["save_rule"],$this->_aParams);
         if(empty($sFormat)){
@@ -41,12 +41,12 @@ class SpiderService
         }
     }
 
-    private function fetchData(){
-        return file_get_contents($this->_aConfig["url"]);
+    private function fetchData($url){
+        return file_get_contents($url);
     }
 
     private function parseUrl(){
-        $this->_aConfig["url"] = DateType::replace($this->_aConfig["url"], $this->_aParams);
-        $this->_aConfig["url"] = DateType::replaceDate($this->_aConfig["url"]);
+        $url = DateType::replace($this->_aConfig["url"], $this->_aParams);
+        return DateType::replaceDate($url);
     }
 }

@@ -14,6 +14,6 @@ $spider = new \GliderSky\framework\spider\SpiderService("US_CHINA");
 $store = new \GliderSky\framework\data\StoreService("file");
 foreach($rs as $row){
     $spider->setParams($row);
-    $rs = $spider->run("json");
-    $store->save($row["code"],$rs);
+    $rs = $spider->run();
+    $store->save($row["code"].".".$rs["day"],json_encode($rs));
 }
