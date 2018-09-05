@@ -15,6 +15,8 @@ return [
             up_price@4,start_price@5,highest_price@6,lowest_price@7,
             highest_price_52week@8,lowest_price_52week@9,buy_sum@10,
             buy_sum_avg_10day@11,market_cap@12,earn_per@13,market_rate@14
-            ,pager_sum@19,end_price@21,yesterday_price@26'
+            ,pager_sum@19,end_price@21,yesterday_price@26',
+        "starttime" => "21:30",
+        "endtime" => "4:00"
     ]
 ];

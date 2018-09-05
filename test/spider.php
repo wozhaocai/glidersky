@@ -15,5 +15,7 @@ $store = new \GliderSky\framework\data\StoreService("file");
 foreach($rs as $row){
     $spider->setParams($row);
     $rs = $spider->run();
-    $store->save($row["code"].".".$rs["day"],json_encode($rs));
+    if($rs){
+        $store->save($row["code"].".".$rs["day"],json_encode($rs));
+    }
 }

@@ -27,7 +27,27 @@ class SpiderService
         $this->_aParams = $aParams;
     }
 
+    private function checkRunStart(){
+        $time = date("H:i");
+        if($this->_aConfig["endtime"] < $this->_aConfig["starttime"]){
+            if($time >= $this->_aConfig["starttime"] or $time <= $this->_aConfig["endtime"]){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if($time <= $this->_aConfig["endtime"] and $time >= $this->_aConfig["starttime"]){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
     public function run($sFormat=""){
+        if($this->checkRunStart() == false){
+            return false;
+        }
         $url = $this->parseUrl();
         $rs = $this->fetchData($url);
         $data = $this->_oParseRules->getData($this->_aConfig["parse_rule"],$rs);
