@@ -25,13 +25,15 @@ class StockService
     }
 
     private function getCode(){
-        return $this->_sModel->query("select distinct code from {$this->_sModel->table};");
+        return $this->_sModel->query("select distinct code,cname from {$this->_sModel->table};");
     }
 
     private function getSumData($sRuleFunction,$iRuleCnt){
         $rs = $this->getCode();
         $all = array();
+        $name = array();
         foreach($rs as $sCode){
+            $name[$sCode["code"]] = $sCode["cname"];
             $sum = 1;
             $temp = array();
             $rs1 = $this->_sModel->query("select day,now_price,up_rate,buy_sum from {$this->_sModel->table} where code='{$sCode['code']}' order by day desc limit 10");
@@ -63,7 +65,7 @@ class StockService
                 }
             }
             if($num > $iRuleCnt){
-                $this->output($aCulcData,$sCode);
+                $this->output($aCulcData,$sCode,$name[$sCode],$sRuleFunction,$iRuleCnt);
             }
         }
     }
@@ -92,8 +94,12 @@ class StockService
         }
     }
 
-    function output($aCulcData,$sCode){
-        echo "\n-------------------{$sCode}------------------------------\n";
+    function output($aCulcData,$sCode,$sName,$sRuleFunction,$iCnt){
+        echo "\n-----------------{$sName}--{$sCode}------------------------------\n";
+        $now = date("Y-m-d");
+        $remark = json_encode($aCulcData);
+        $sql = "insert into {$this->_sModel->recommand_table}(day,code,cname,ctype,val,remark) values('{$now}','{$sCode}','{$sName}','{$sRuleFunction}','{$iCnt}','{$remark}')";
+        $this->_sModel->query($sql);
         foreach($aCulcData as $i => $row){
             foreach($row as $key=>$val){
                 echo $key.":".$val."\t";
