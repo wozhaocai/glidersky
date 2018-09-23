@@ -3,7 +3,8 @@
     "description": "new framework set",
     "type": "project",
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "qcloudsms/qcloudsms_php": "^0.1.3"
     },
     "license": "Apache-2.0",
     "authors": [

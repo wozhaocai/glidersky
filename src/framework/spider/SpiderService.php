@@ -45,9 +45,9 @@ class SpiderService
     }
 
     public function run($sFormat=""){
-        if($this->checkRunStart() == false){
-            return false;
-        }
+        //if($this->checkRunStart() == false){
+           // return false;
+        //}
         $url = $this->parseUrl();
         $rs = $this->fetchData($url);
         $data = $this->_oParseRules->getData($this->_aConfig["parse_rule"],$rs);
