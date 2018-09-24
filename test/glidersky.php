@@ -11,7 +11,8 @@ use GliderSky\GliderSky;
 
 define("APPLICATION_PATH",dirname(dirname(__FILE__)));
 
-$glidersky = new GliderSky(APPLICATION_PATH."/test/config");
+$glidersky = new GliderSky("/home/data/config/glidersky/test/config");
+//$glidersky = new GliderSky(APPLICATION_PATH."/test/config");
 $glidersky->start();
 
 spl_autoload_register(array('Config',"loader"));

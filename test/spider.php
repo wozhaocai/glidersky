@@ -43,8 +43,12 @@ function send($code,$type){
     }else{
         if($queue[0]["cnt"] < 3){
             $queuemodule->query("update {table} set cnt=cnt+1 where code='{$code}' and day='{$currentday}' and type='{$type}'");
+            $message = new \GliderSky\framework\message\MessageService("sell");
+            $message->sendAlert($code,$type);
         }
         print_r("exceed 3");
     }
 }
+
+
 
