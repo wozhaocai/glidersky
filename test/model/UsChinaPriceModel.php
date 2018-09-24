@@ -13,7 +13,7 @@ use GliderSky\framework\common\BaseModel;
 class UsChinaPriceModel extends BaseModel{
     public $connect = "STOCK";
     public $table = "us_china_price";
-    public $recommand_table = "us_china_recommamd";
+    public $recommand_table = "us_china_recommand";
 
     public function __construct()
     {
