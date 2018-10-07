@@ -10,10 +10,10 @@ namespace test\model;
 
 use GliderSky\framework\common\BaseModel;
 
-class ChinaShPriceModel extends BaseModel{
+class ChinaSzPriceModel extends BaseModel{
     public $connect = "STOCK";
-    public $table = "china_sh_price";
-    public $recommand_table = "china_sh_recommand";
+    public $table = "china_sz_price";
+    public $recommand_table = "china_sz_recommand";
 
     public function __construct()
     {
