@@ -58,6 +58,9 @@ class StockService
             $aCulcData = array_reverse($aData["option"]);
             $num = 0;
             foreach($aCulcData as $i => $row){
+                if($row["up_rate"] == "0.00"){
+                    continue;
+                }
                 if($this->$sRuleFunction($row)){
                     $num++;
                 }else{
