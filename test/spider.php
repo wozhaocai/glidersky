@@ -9,7 +9,8 @@
 require_once "glidersky.php";
 
 $module = new \GliderSky\framework\data\ModelService("test\model\UsChinaPriceModel");
-$rs = $module->query("select distinct code from {table};");
+$rs = $module->query("select distinct code from mystock;");
+//$rs = $module->query("select distinct code from {table};");
 $spider = new \GliderSky\framework\spider\SpiderService("US_CHINA");
 //$store = new \GliderSky\framework\data\StoreService("file");
 $stockmodule = new \GliderSky\framework\data\ModelService("test\model\MystockModel");
