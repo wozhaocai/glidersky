@@ -34,7 +34,7 @@ $oStock = new \GliderSky\framework\arithmetic\StockService();
 $oStock->calculate($aOption["a"],$aOption["b"],$aOption["n"]);
 
 function usage_help($sHelp) {
-    echo str_replace("{script}", FILENAME, $sHelp);
+    echo str_replace("{script}", __FILE__, $sHelp);
     exit(0);
 }
 
