@@ -49,7 +49,7 @@ class SpiderService
             return false;
         }
         $url = $this->parseUrl();
-        $rs = $this->fetchData($url);
+        $rs = $this->fetchData(strtolower($url));
         $data = $this->_oParseRules->getData($this->_aConfig["parse_rule"],$rs);
         $rs = $this->_oParseRules->saveData($data,$this->_aConfig["save_rule"],$this->_aParams);
         if(empty($sFormat)){
@@ -62,7 +62,14 @@ class SpiderService
     }
 
     private function fetchData($url){
-        return file_get_contents($url);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);//这个是重点。
+        $data = curl_exec($curl);
+        curl_close($curl);
+        return $data;
     }
 
     private function parseUrl(){
