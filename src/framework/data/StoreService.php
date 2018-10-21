@@ -8,6 +8,7 @@
 
 namespace GliderSky\framework\data;
 
+use GliderSky\lib\Memcached;
 
 class StoreService
 {
@@ -20,11 +21,17 @@ class StoreService
                 $this->_oObj = new FileStore();
                 break;
             default:
+                //$this->_oObj = Memcached::get;
                 break;
         }
     }
 
-    public function save($sKey,$aData){
-        return $this->_oObj->save($sKey,$aData);
+    public function set($sKey,$aData,$time=3600){
+        return $this->_oObj->set($sKey,$aData,$time);
     }
+
+    public function get($sKey){
+        return $this->_oObj->get($sKey);
+    }
+
 }

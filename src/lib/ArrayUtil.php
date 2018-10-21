@@ -18,4 +18,12 @@ class ArrayUtil
         }
         return implode(";",$aLine);
     }
+
+    public static function setKeyArr($arr,$key){
+        $newArr = array();
+        foreach($arr as $value){
+            $newArr[$value[$key]] = $value;
+        }
+        return $newArr;
+    }
 }

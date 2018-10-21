@@ -19,8 +19,12 @@ class MessageService
         $this->_aConfig = \Config::$Config["sms"][$name];
     }
 
-    public function sendAlert($code,$type){
-        $this->sendSms($code.time(),$type);
+    public function sendAlert($code,$type,$sendType="sms"){
+        if($sendType == "sms"){
+            $this->sendSms($code.time(),$type);
+        }else{
+            echo $code.":".$type."\n";
+        }
     }
 
     private function sendSms($code, $type)

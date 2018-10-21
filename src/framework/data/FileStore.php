@@ -19,7 +19,7 @@ class FileStore
         $this->_aConfig = \Config::$Config["store"]["file"];
     }
 
-    public function save($sKey,$sStr){
+    public function set($sKey,$sStr){
         $this->_oHandle = fopen($this->_aConfig["dir"]."/".$sKey.".txt","a+");
         if($this->_oHandle){
             fputs($this->_oHandle,$sStr."\n",2048);
