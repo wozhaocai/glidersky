@@ -26,6 +26,7 @@ $aCodeAllInfo = array();
 foreach ($codeList as $row) {
     $spider->setParams($row);
     $rs = $spider->run('', false);
+    if(empty($rs["up_rate"])) continue;
     if ($rs) {
         $sStr = "|股票名称:".$rs["cname"]."&nbsp;&nbsp;涨幅:".$rs["up_rate"]."%";
         $aCodePrice[$rs["code"].$sStr] = $rs["up_rate"];
