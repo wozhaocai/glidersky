@@ -44,9 +44,9 @@ class SpiderService
         }
     }
 
-    public function run($sFormat=""){
-        if($this->checkRunStart() == false){
-            return false;
+    public function run($sFormat="",$sCheck=true){
+        if($sCheck and $this->checkRunStart() == false){
+           return false;
         }
         $url = $this->parseUrl();
         $rs = $this->fetchData(strtolower($url));

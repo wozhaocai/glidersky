@@ -14,11 +14,11 @@ class StoreService
 {
     private $_oObj = null;
 
-    public function __construct($sType)
+    public function __construct($sType,$params=array())
     {
         switch($sType){
             case "file":
-                $this->_oObj = new FileStore();
+                $this->_oObj = new FileStore($params);
                 break;
             default:
                 //$this->_oObj = Memcached::get;
@@ -26,8 +26,8 @@ class StoreService
         }
     }
 
-    public function set($sKey,$aData,$time=3600){
-        return $this->_oObj->set($sKey,$aData,$time);
+    public function set($sKey,$aData,$time=3600,$mode="a+"){
+        return $this->_oObj->set($sKey,$aData,$time,$mode);
     }
 
     public function get($sKey){

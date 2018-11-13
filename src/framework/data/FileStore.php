@@ -14,13 +14,17 @@ class FileStore
     private $_aConfig = array();
     private $_oHandle = null;
 
-    public function __construct()
+    public function __construct($params=array())
     {
-        $this->_aConfig = \Config::$Config["store"]["file"];
+        if(empty($params)){
+            $this->_aConfig = \Config::$Config["store"]["file"];
+        }else{
+            $this->_aConfig = $params;
+        }
     }
 
-    public function set($sKey,$sStr){
-        $this->_oHandle = fopen($this->_aConfig["dir"]."/".$sKey.".txt","a+");
+    public function set($sKey,$sStr,$timeout=0,$mode="a+"){
+        $this->_oHandle = fopen($this->_aConfig["dir"]."/".$sKey.".txt",$mode);
         if($this->_oHandle){
             fputs($this->_oHandle,$sStr."\n",2048);
         }
