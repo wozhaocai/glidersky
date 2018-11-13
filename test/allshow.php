@@ -8,14 +8,13 @@
 
 require_once "glidersky.php";
 
-//$codeList = \GliderSky\lib\Memcacheds::get("codelist");
-//if (!empty($result)) {
+$codeList = \GliderSky\lib\Memcacheds::get("codelist");
+if (empty($codeList)) {
     $module = new \GliderSky\framework\data\ModelService("test\model\UsChinaCodeModel");
     $codeList = $module->query("select distinct code from {table} where enable=1;");
-    //\GliderSky\lib\Memcacheds::set("codelist", $codeList, 3600);
-//}
-print_r($codeList);
-exit;
+    \GliderSky\lib\Memcacheds::set("codelist", $codeList, 3600);
+}
+
 $spider = new \GliderSky\framework\spider\SpiderService("US_CHINA");
 $params = [
     "dir" => "/home/data/stock/show",
